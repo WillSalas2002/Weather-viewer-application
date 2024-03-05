@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+    <h1>Search Page</h1>
+    <p th:text="${location.names}"></p>
+    <p th:text="'Longitude: ' + ${location.longitude}"></p>
+    <p th:text="'Latitude: ' + ${location.latitude}"></p>
+
+    <form th:method="POST" th:action="@{/add}" th:object="${location}">
+        <input type="hidden" th:field="*{names}"/>
+        <input type="hidden" th:field="*{latitude}"/>
+        <input type="hidden" th:field="*{longitude}"/>
+        <input type="submit" value="Add"/>
+    </form>
+</body>
+</html>
