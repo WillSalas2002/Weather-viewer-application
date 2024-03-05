@@ -1,13 +1,13 @@
 package com.will.weather.viewer.app.services;
 
+import com.will.weather.viewer.app.dto.LocationDTO;
 import com.will.weather.viewer.app.weatherEntities.WeatherResponse;
-import com.will.weather.viewer.app.weatherEntities.WeatherDTO;
+import com.will.weather.viewer.app.dto.WeatherDTO;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 
 @Component
 public class JsonToJavaConverter {
@@ -36,8 +36,16 @@ public class JsonToJavaConverter {
         return weatherDTO;
     }
 
+    public LocationDTO convertToLocation(WeatherResponse weatherResponse) {
+        LocationDTO locationDTO = new LocationDTO();
+        locationDTO.setNames(weatherResponse.getName() + ", " + weatherResponse.getSys().getCountry());
+        locationDTO.setLatitude(weatherResponse.getCoordinate().getLat());
+        locationDTO.setLongitude(weatherResponse.getCoordinate().getLon());
+
+        return locationDTO;
+    }
+
     private static int convertKelvinToCelsius(double kelvin) {
-        System.out.println(kelvin);
         return (int) (kelvin - 273.15);
     }
 
@@ -46,9 +54,6 @@ public class JsonToJavaConverter {
 
         ZoneId zoneId = ZoneId.systemDefault();
         LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDateTime = localDateTime.format(formatter);
 
         return localDateTime;
     }

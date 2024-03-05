@@ -1,6 +1,7 @@
 package com.will.weather.viewer.app.services;
 
-import com.will.weather.viewer.app.weatherEntities.WeatherDTO;
+import com.will.weather.viewer.app.dto.LocationDTO;
+import com.will.weather.viewer.app.dto.WeatherDTO;
 import com.will.weather.viewer.app.weatherEntities.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,11 +25,11 @@ public class WeatherApiClient {
         this.converter = converter;
     }
 
-    public WeatherDTO sendRequestByCityName(String cityName) {
+    public LocationDTO sendRequestByCityName(String cityName) {
         String url = URL_BY_NAME + cityName + URL_API + API_KEY;
         WeatherResponse weatherResponse = restTemplate.getForObject(url, WeatherResponse.class);
-        WeatherDTO weatherDTO = converter.convert(weatherResponse);
-        return weatherDTO;
+        LocationDTO locationDTO = converter.convertToLocation(weatherResponse);
+        return locationDTO;
     }
 
     public WeatherDTO sendRequestByLocation(BigDecimal lat, BigDecimal lon) {
