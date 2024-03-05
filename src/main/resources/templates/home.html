@@ -5,11 +5,26 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>Home Page</h1>
+<h1>Home Page</h1>
 
-    <form th:action="@{/logout}" th:method="POST">
-        <input type="submit" value="Logout" />
-    </form>
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Logout"/>
+</form>
 
+<form th:action="@{/search}" th:method="GET">
+    <label for="search">Search</label>
+    <input type="text" id="search" name="city-name"/>
+    <input type="submit" value="Search"/>
+</form>
+
+<div th:if="${weathers.size() > 0}">
+    <div th:each="weather : ${weathers}">
+        <form th:method="DELETE" th:action="@{/delete}">
+            <p th:text="${weather}"></p>
+            <input type="hidden" name="location_name" th:value="${weather.getCityName()} + ', ' + ${weather.getCountryCode()}"/>
+            <input type="submit" value="Delete"/>
+        </form>
+    </div>
+</div>
 </body>
 </html>
