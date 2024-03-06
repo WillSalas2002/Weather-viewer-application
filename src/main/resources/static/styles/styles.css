@@ -1,0 +1,90 @@
+html {
+    background-color: aqua;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.current-weather-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 300px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: antiquewhite;
+    padding: 16px;
+}
+
+.main-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+.temperature-details {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+.icon-description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.temp-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.other-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+.sunset-sunrise-times {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    align-items: center;
+    width: 100%
+}
+
+.button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: border-box;
+    box-sizing: content-box;
+}
+
+.spaced-content {
+    text-align: start;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+}
