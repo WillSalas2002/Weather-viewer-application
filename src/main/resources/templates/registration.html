@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
+    <link th:href="@{/styles/forms.css}" rel="stylesheet"/>
 </head>
 <body>
-    <h1>Registration page</h1>
-    <form th:method="POST" th:action="@{/registration}" th:object="${user}">
-        <label for="login">Enter Login: </label>
-        <input type="text" id="login" th:field="*{login}" />
-        <br/>
-        <label for="password">Enter Password: </label>
-        <input type="text" id="password" th:field="*{password}" />
-        <br/>
-        <input type="submit" value="Register"/>
 
-        <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</div>
-    </form>
+<form th:method="POST" th:action="@{/registration}" th:object="${user}">
+    <h1>Registration</h1>
+    <div class="container">
+        <label for="login"><b>Enter Login:</b></label>
+        <input type="text" th:field="*{login}" id="login"/>
+
+        <label for="password"><b>Enter Password:</b></label>
+        <input type="password" th:field="*{password}" id="password"/>
+
+        <input class="button" type="submit" value="Register"/>
+        <div th:if="${param.error}" style="color: red">
+            Wrong username or password
+        </div>
+    </div>
+</form>
+<!--    <h1>Registration page</h1>-->
+<!--    <form th:method="POST" th:action="@{/registration}" th:object="${user}">-->
+<!--        <label for="login">Enter Login: </label>-->
+<!--        <input type="text" id="login" th:field="*{login}" />-->
+<!--        <br/>-->
+<!--        <label for="password">Enter Password: </label>-->
+<!--        <input type="text" id="password" th:field="*{password}" />-->
+<!--        <br/>-->
+<!--        <input type="submit" value="Register"/>-->
+
+<!--        <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Login Error</div>-->
+<!--    </form>-->
 </body>
 </html>

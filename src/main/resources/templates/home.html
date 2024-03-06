@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css"/>
 </head>
 <body>
 <h1>Home Page</h1>
@@ -17,14 +18,54 @@
     <input type="submit" value="Search"/>
 </form>
 
-<div th:if="${weathers.size() > 0}">
+<div class="container text-center" th:if="${weathers.size() > 0}">
     <div th:each="weather : ${weathers}">
-        <form th:method="DELETE" th:action="@{/delete}">
-            <p th:text="${weather}"></p>
-            <input type="hidden" name="location_name" th:value="${weather.getCityName()} + ', ' + ${weather.getCountryCode()}"/>
-            <input type="submit" value="Delete"/>
-        </form>
+        <div class="current-weather-card">
+            <div class="main-data">
+                <div th:text="${weather.getCityName()} + ', ' + ${weather.getCountryCode()}"></div>
+                <div th:text="${weather.getCurrentTime()}"></div>
+            </div>
+            <div class="temperature-details">
+                <div class="icon-description">
+                    <div><img th:src="@{'/images/' + ${weather.getIcon()} + '.png'}" alt="weather-icon"/></div>
+                    <div th:text="${weather.getDescription()}"></div>
+                </div>
+                <div class="temp-info">
+                    <div class="temp" th:text="${weather.getTemp()} + 'C°'"></div>
+                </div>
+            </div>
+            <div class="other-details">
+                <div class="spaced-content">
+                    <div th:text="'Feels like: ' + ${weather.getTempFeelsLike()}"></div>
+                    <div th:text="'Pressure: ' + ${weather.getPressure()}"></div>
+                    <div th:text="'Max Temperature: ' + ${weather.getTempMin()}"></div>
+                    <div th:text="'Humidity: ' + ${weather.getHumidity()}"></div>
+                </div>
+                <div class="spaced-content">
+                    <div th:text="'Min Temperature: ' + ${weather.getTempMax()}"></div>
+                    <div th:text="'Wind Speed: ' + ${weather.getSpeed()}"></div>
+                    <div th:text="'Wind Degree: ' + ${weather.getWindDegree()}"></div>
+                    <div th:text="'Gust: ' + ${weather.getGust()}"></div>
+                </div>
+            </div>
+            <div class="sunset-sunrise-times">
+                <div>
+                    <div><img th:src="@{/images/sunrise.png}" alt="sunrise-pic"/></div>
+                    <div th:text="${weather.getSunriseTime().toLocalTime()}"></div>
+                </div>
+                <div>
+                    <div><img th:src="@{/images/sunset.png}" alt="sunset-pic"/></div>
+                    <div th:text="${weather.getSunsetTime().toLocalTime()}"></div>
+                </div>
+            </div>
+            <form th:method="DELETE" th:action="@{/delete}">
+                <input type="hidden" name="location_name"
+                       th:value="${weather.getCityName()} + ', ' + ${weather.getCountryCode()}"/>
+                <input class="button" type="submit" value="Remove"/>
+            </form>
+        </div>
     </div>
+</div>
 </div>
 </body>
 </html>
